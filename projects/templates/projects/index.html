@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load thumbnail %}
+
+{% block content %}
+  {% if projects_list %}
+    <div class="grid grid-cols-3 items-start gap-6">
+      {% for project in projects_list %}
+        <a href="{% url 'projects:detail' project.id %}">
+          <div class="gap-4 items-center border-1 border-solid rounded-md">
+            <p class="text-center">{{ project.name }}</p>
+            <div class="items-center">
+              <p class="text-center">{{ project.description }}</p>
+              {% thumbnail project.preview_img 200x200 crop as p_img %}
+              <img class="mx-auto" src="{{ p_img.url }}"
+                width="{{ p_img.width }}"
+                height="{{ p_img.height }}"/>
+              
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No projects are available.</p>
+  {% endif %}
+{% endblock %}

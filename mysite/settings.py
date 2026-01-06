@@ -37,6 +37,26 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #custom apps
+    'projects.apps.ProjectsConfig',
+    #media
+    'easy_thumbnails',
+    #tailwind
+    'tailwind',
+    'theme',
+    'django_browser_reload',
+]
+
+
+#TODO make normal media structure
+MEDIA_URL = 'projects/media/'
+MEDIA_ROOT = BASE_DIR/'projects/media/'
+
+
+#tailwind stuff
+TAILWIND_APP_NAME = 'theme'
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 MIDDLEWARE = [
@@ -47,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_browser_reload.middleware.BrowserReloadMiddleware", #needed for autoreload
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -73,11 +94,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    "default": {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 
 # Password validation
