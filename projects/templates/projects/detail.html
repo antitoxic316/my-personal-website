@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load thumbnail %}
+
+{% block content %}
+  <div class="mx-auto items-center">
+    <h1 class="text-4xl justify-center flex m-4">{{ project.name }}</h1>
+    {% thumbnail project.preview_img 800x800 crop as p_img %}
+              <img class="mx-auto" src="{{ p_img.url }}"
+                width="{{ p_img.width }}"
+                height="{{ p_img.height }}"/>
+    <hr>
+    <div id="relevant_links" class="flex flex-col font-(family-name:'Courier New') -ml-[40px]">
+      {% for rel_link in project.relevant_links %}
+        <a href="{{ rel_link }}">{{ rel_link }}</a>
+      {% endfor %}
+    </div>
+    <hr>
+    <div class="flex justify-center">
+      <div class="break-words prose text-[var(--txt-color)] max-w-4xl">
+        {{ project.detail_content|safe }}
+      </div>
+    </div>
+  </div>
+{% endblock %}

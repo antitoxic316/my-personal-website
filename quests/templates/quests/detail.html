@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load thumbnail %}
+
+{% block content %}
+  <div class="mx-auto">
+    <h1 class="text-4xl justify-center flex m-4">{{ quest.name }}</h1>
+    {% thumbnail quest.preview_img 800x800 crop as p_img %}
+              <img class="mx-auto" src="{{ p_img.url }}"
+                width="{{ p_img.width }}"
+                height="{{ p_img.height }}"/>
+    <hr>
+    <div class="flex justify-center">
+      <div class="break-words prose text-[var(--txt-color)] max-w-4xl">
+        {{ quest.detail_content|safe }}
+      </div>
+    </div>
+  </div>
+{% endblock %}

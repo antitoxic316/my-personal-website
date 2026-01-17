@@ -1,0 +1,40 @@
+.color-scheme-day{
+  --bg: azure;
+  --bg-darker: color-mix(in srgb, azure, black 8%);
+  color: black;
+}
+
+.color-scheme-night{
+  --bg: rgb(34, 33, 33);
+  --bg-darker: color-mix(in srgb, rgb(34, 33, 33), black 12%);
+  color: white;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  top: auto;
+  padding: 10px;
+}
+
+.dropdown-content div {
+  margin-top: 3px;
+}
+
+.dropdown-content div:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}

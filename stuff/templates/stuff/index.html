@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load thumbnail %}
+
+{% block content %}
+  {% if misc_urls %}
+    <div class="grid grid-cols-3 items-start gap-6">
+      {% for misc_url in misc_urls %}
+        <a href="{% url '{{ misc_template }}' %}">
+          <div class="gap-4 items-center border-1 border-solid rounded-md">
+            <p class="flex">{{ misc_url.name }}</p>
+            <p class="flex">{{ misc_url.template_name }}</p>
+            <p class="flex">{{ misc_url.unique_string }}</p>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load thumbnail %}
+
+{% block content %}
+  {% if quests_list %}
+    <div class="grid grid-cols-4 items-start gap-6">
+      {% for quest in quests_list %}
+        <div class="border-1 border-solid rounded-md flex justify-between items-center">
+          <div class="flex-grow">
+            <a href="{% url 'quests:detail' quest.id %}">
+              <p class="text-center">{{ quest.name }}</p>
+            </a>
+            <hr>
+            <div class="dropdown">
+              <div class="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm inset-ring-1 inset-ring-white/5">
+                <label class="flex">
+                  Related projects
+                </label>
+                <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="-mr-1 size-5 text-gray-400">
+                  <path d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+                </svg>
+              </div>
+              <div class="dropdown-content">
+                {% for rel_proj in quest.projects_links.all %}
+                <div class="">
+                  <a href='/projects/{{ rel_proj.id }}'>{{ rel_proj.name }}</a>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          <div class="">
+            {% thumbnail quest.preview_img 80x80 crop as p_img %}
+            <img class="mx-auto" src="{{ p_img.url }}"
+              width="{{ p_img.width }}"
+              height="{{ p_img.height }}"/>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No quests are available.</p>
+  {% endif %}
+{% endblock %}

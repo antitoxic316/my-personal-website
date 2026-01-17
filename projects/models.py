@@ -1,6 +1,5 @@
 from django.db import models
-
-# Create your models here.
+from tinymce import models as tinymce_models
 
 class Project(models.Model):
   name = models.CharField(max_length=100);
@@ -9,3 +8,7 @@ class Project(models.Model):
     upload_to='images/',
     default='images/lain1.png'
   );
+
+  detail_content = tinymce_models.HTMLField(default="")
+
+  relevant_links = models.JSONField(default=list, blank=True)

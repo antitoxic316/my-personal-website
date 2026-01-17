@@ -9,13 +9,20 @@
         <a href="{% url 'projects:detail' project.id %}">
           <div class="gap-4 items-center border-1 border-solid rounded-md">
             <p class="text-center">{{ project.name }}</p>
+            <hr>
             <div class="items-center">
-              <p class="text-center">{{ project.description }}</p>
-              {% thumbnail project.preview_img 200x200 crop as p_img %}
+              <p class="text-left break-words">{{ project.description }}</p>
+              {% thumbnail project.preview_img 300x300 crop as p_img %}
               <img class="mx-auto" src="{{ p_img.url }}"
                 width="{{ p_img.width }}"
                 height="{{ p_img.height }}"/>
-              
+            </div>
+            <hr>
+            <div>
+              <p> </p>
+              {% for p_tag in project.tag_list %}
+                <p>{{ p_tag }} {% if not forloop.last %}, {% endif %}</p>
+              {% endfor %}
             </div>
           </div>
         </a>
