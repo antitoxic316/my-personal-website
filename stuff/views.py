@@ -17,5 +17,11 @@ class IndexView(generic.TemplateView):
 class CatView(generic.TemplateView):
   template_name = "stuff/cat.html"
 
+  extra_context = {
+    "mini_elems_range": range(1,30),
+  }
+
 class StatsView(generic.TemplateView):
   template_name = "stuff/stats.html"
+
+  

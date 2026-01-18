@@ -12,6 +12,7 @@
     --color-gray-400: oklch(70.7% 0.022 261.325);
     --color-white: #fff;
     --spacing: 0.25rem;
+    --container-4xl: 56rem;
     --text-sm: 0.875rem;
     --text-sm--line-height: calc(1.25 / 0.875);
     --text-xl: 1.25rem;
@@ -209,9 +210,6 @@
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
-  .right-0 {
-    right: calc(var(--spacing) * 0);
-  }
   .z-50 {
     z-index: 50;
   }
@@ -235,6 +233,12 @@
   }
   .m-4 {
     margin: calc(var(--spacing) * 4);
+  }
+  .m-6 {
+    margin: calc(var(--spacing) * 6);
+  }
+  .mx-2 {
+    margin-inline: calc(var(--spacing) * 2);
   }
   .mx-auto {
     margin-inline: auto;
@@ -654,14 +658,8 @@
       margin-bottom: 0;
     }
   }
-  .mt-4 {
-    margin-top: calc(var(--spacing) * 4);
-  }
   .-mr-1 {
     margin-right: calc(var(--spacing) * -1);
-  }
-  .mr-6 {
-    margin-right: calc(var(--spacing) * 6);
   }
   .-ml-\[40px\] {
     margin-left: calc(40px * -1);
@@ -716,14 +714,35 @@
     width: calc(var(--spacing) * 6);
     height: calc(var(--spacing) * 6);
   }
-  .min-h-screen {
-    min-height: 100vh;
+  .h-full {
+    height: 100%;
+  }
+  .w-14 {
+    width: calc(var(--spacing) * 14);
   }
   .w-56 {
     width: calc(var(--spacing) * 56);
   }
+  .w-240 {
+    width: calc(var(--spacing) * 240);
+  }
+  .w-256 {
+    width: calc(var(--spacing) * 256);
+  }
+  .w-300 {
+    width: calc(var(--spacing) * 300);
+  }
+  .w-500 {
+    width: calc(var(--spacing) * 500);
+  }
   .w-full {
     width: 100%;
+  }
+  .max-w-4xl {
+    max-width: var(--container-4xl);
+  }
+  .flex-shrink {
+    flex-shrink: 1;
   }
   .flex-grow {
     flex-grow: 1;
@@ -749,6 +768,15 @@
   .grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+  .grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .grid-cols-8 {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+  .flex-col {
+    flex-direction: column;
+  }
   .items-center {
     align-items: center;
   }
@@ -770,11 +798,14 @@
   .gap-6 {
     gap: calc(var(--spacing) * 6);
   }
+  .gap-x-1 {
+    column-gap: calc(var(--spacing) * 1);
+  }
   .gap-x-1\.5 {
     column-gap: calc(var(--spacing) * 1.5);
   }
-  .gap-x-6 {
-    column-gap: calc(var(--spacing) * 6);
+  .gap-x-2 {
+    column-gap: calc(var(--spacing) * 2);
   }
   .self-stretch {
     align-self: stretch;
@@ -801,6 +832,14 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+  .border-r-2 {
+    border-right-style: var(--tw-border-style);
+    border-right-width: 2px;
+  }
+  .border-b-2 {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 2px;
+  }
   .border-solid {
     --tw-border-style: solid;
     border-style: solid;
@@ -813,6 +852,12 @@
   }
   .bg-gray-50 {
     background-color: var(--color-gray-50);
+  }
+  .object-cover {
+    object-fit: cover;
+  }
+  .p-2 {
+    padding: calc(var(--spacing) * 2);
   }
   .p-4 {
     padding: calc(var(--spacing) * 4);
@@ -847,10 +892,6 @@
     font-size: var(--text-sm);
     line-height: var(--tw-leading, var(--text-sm--line-height));
   }
-  .text-xl {
-    font-size: var(--text-xl);
-    line-height: var(--tw-leading, var(--text-xl--line-height));
-  }
   .leading-normal {
     --tw-leading: var(--leading-normal);
     line-height: var(--leading-normal);
@@ -865,6 +906,9 @@
   }
   .break-words {
     overflow-wrap: break-word;
+  }
+  .text-\[var\(--txt-color\)\] {
+    color: var(--txt-color);
   }
   .text-gray-400 {
     color: var(--color-gray-400);
@@ -898,6 +942,9 @@
   .inset-ring-1 {
     --tw-inset-ring-shadow: inset 0 0 0 1px var(--tw-inset-ring-color, currentcolor);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .inset-ring-white {
+    --tw-inset-ring-color: var(--color-white);
   }
   .inset-ring-white\/5 {
     --tw-inset-ring-color: color-mix(in srgb, #fff 5%, transparent);
@@ -948,6 +995,13 @@
   }
   .\[--anchor-gap\:--spacing\(2\)\] {
     --anchor-gap: calc(var(--spacing) * 2);
+  }
+  .hover\:bg-\[var\(--bg2\)\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--bg2);
+      }
+    }
   }
   .data-closed\:scale-95 {
     &[data-closed] {

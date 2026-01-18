@@ -1,13 +1,34 @@
 .color-scheme-day{
   --bg: azure;
-  --bg-darker: color-mix(in srgb, azure, black 8%);
-  color: black;
-}
+  --bg2: #ddd;
+  --bg-alt: color-mix(in srgb, azure, black 8%);
+  --fg: black;
+  --fg-alt: black;
+  color: var(--fg);
+  fill: var(--fg);
+  stroke: var(--fg);
+} 
 
 .color-scheme-night{
   --bg: rgb(34, 33, 33);
-  --bg-darker: color-mix(in srgb, rgb(34, 33, 33), black 12%);
-  color: white;
+  --bg2: rgb(34, 33, 33);
+  --bg-alt: color-mix(in srgb, rgb(34, 33, 33), white 12%);
+  --fg: #FFFFFF;
+  --fg-alt: #FFFFFF;
+  color: var(--fg);
+  fill: var(--fg);
+  stroke: var(--fg);
+}
+
+.color-scheme-commonality{
+  --bg: rgb(223,199,188);
+  --bg2: rgb(188,223,217);
+  --bg-alt: rgb(188,195,223);
+  --fg: #1E1A17;
+  --fg-alt: #3A2416;
+  color: var(--fg);
+  fill: var(--fg);
+  stroke: var(--fg);
 }
 
 body {
@@ -22,18 +43,24 @@ body {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: var(--bg2);
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   top: auto;
   padding: 10px;
+  min-width: 160px;
+}
+
+.dropdown-content a {
+  display: block;
 }
 
 .dropdown-content div {
   margin-top: 3px;
 }
 
-.dropdown-content div:hover {background-color: #ddd;}
+.dropdown-content div:hover {background-color: var(--bg-alt);}
+.dropdown-content a:hover {background-color: var(--bg-alt);}
 
 .dropdown:hover .dropdown-content {
   display: block;

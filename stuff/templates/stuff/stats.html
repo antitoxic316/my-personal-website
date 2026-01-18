@@ -1,1 +1,35 @@
 {% extends 'base.html' %}
+
+{% block content %}
+  <div class="grid grid-cols-6 items-start gap-6">
+    <div id="clockStats">
+      <span id="clock"></span>
+    </div>        
+    <div id="staticFilesStats">
+    </div>        
+    <div id="coockiesStats">
+    </div>
+    <div id="ipStats">
+    </div>
+    <div id="headersStats">
+    </div>
+    <div id="timerStats">
+      <span id="timer"></span>
+    </div>
+  </div>
+
+<script>
+  setInterval(() => {
+    var now = new Date()
+    clock.innerHTML = now
+  }, 1000)
+
+  setInterval(() => {
+    var date = new Date()
+    date.setHours(0,0,date.getSeconds(),date.getMilliseconds())
+    var sec = date.getMilliseconds()
+    var finale_str = `${date.getSeconds()}.${date.getMilliseconds()}`
+    timer.innerHTML = finale_str
+  }, 1)
+</script>
+{% endblock %}

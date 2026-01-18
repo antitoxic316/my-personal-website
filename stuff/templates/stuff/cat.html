@@ -1,1 +1,53 @@
 {% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <div id="mini_gifs_container" class="flex justify-between">
+  </div>
+  <div class="flex justify-center">
+    <button id="meowButton" class="cursor-pointer">
+      <img
+                src="{% static 'images/trans-cat.png' %}",
+                alt="trans-cat.png",
+                loading="lazy",
+                class="w-240 h-full object-cover"
+              >
+    </button>
+    <audio id="meowSnd" preload="auto">
+      <source src="{% static '/audio/kitten_mew-1.wav' %}">
+    </audio>
+  </div>
+<script>
+  document.getElementById("meowButton")
+          .addEventListener('click', function() {
+    var snd = document.getElementById("meowSnd")
+    snd.currentTime = 0
+    snd.play()
+  })
+</script>
+<script>
+  var images_list = [
+      "{% static 'images/cat_run.gif' %}",
+      "{% static 'images/disk.gif' %}",
+      "{% static 'images/trans-cat.png' %}"
+  ]
+  var img_elems_count = 10
+
+  var rand_indexes = new Uint32Array(img_elems_count);
+  crypto.getRandomValues(rand_indexes);
+
+  for(var i = 0; i < 10; i++){
+    var selected_i = rand_indexes[i] % images_list.length
+
+    var img = document.createElement('img');
+    img.src = images_list[selected_i];
+    img.alt = "rand_img";
+    img.loading = "lazy";
+    img.className = "w-24 h-full object-cover";
+
+    var cont = document.getElementById("mini_gifs_container")
+    cont.appendChild(img)
+  }
+</script>
+{% endblock %}
