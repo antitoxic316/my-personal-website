@@ -15,8 +15,6 @@
     --container-4xl: 56rem;
     --text-sm: 0.875rem;
     --text-sm--line-height: calc(1.25 / 0.875);
-    --text-xl: 1.25rem;
-    --text-xl--line-height: calc(1.75 / 1.25);
     --text-4xl: 2.25rem;
     --text-4xl--line-height: calc(2.5 / 2.25);
     --text-5xl: 3rem;
@@ -191,6 +189,9 @@
   }
   .visible {
     visibility: visible;
+  }
+  .visible\! {
+    visibility: visible !important;
   }
   .absolute {
     position: absolute;
@@ -682,6 +683,9 @@
   .hidden {
     display: none;
   }
+  .hidden\! {
+    display: none !important;
+  }
   .inline {
     display: inline;
   }
@@ -717,23 +721,29 @@
   .h-full {
     height: 100%;
   }
+  .min-h-96 {
+    min-height: calc(var(--spacing) * 96);
+  }
+  .min-h-200 {
+    min-height: calc(var(--spacing) * 200);
+  }
+  .min-h-400 {
+    min-height: calc(var(--spacing) * 400);
+  }
+  .min-h-full {
+    min-height: 100%;
+  }
   .w-14 {
     width: calc(var(--spacing) * 14);
+  }
+  .w-24 {
+    width: calc(var(--spacing) * 24);
   }
   .w-56 {
     width: calc(var(--spacing) * 56);
   }
   .w-240 {
     width: calc(var(--spacing) * 240);
-  }
-  .w-256 {
-    width: calc(var(--spacing) * 256);
-  }
-  .w-300 {
-    width: calc(var(--spacing) * 300);
-  }
-  .w-500 {
-    width: calc(var(--spacing) * 500);
   }
   .w-full {
     width: 100%;
@@ -742,6 +752,9 @@
     max-width: var(--container-4xl);
   }
   .flex-shrink {
+    flex-shrink: 1;
+  }
+  .shrink {
     flex-shrink: 1;
   }
   .flex-grow {
@@ -770,9 +783,6 @@
   }
   .grid-cols-6 {
     grid-template-columns: repeat(6, minmax(0, 1fr));
-  }
-  .grid-cols-8 {
-    grid-template-columns: repeat(8, minmax(0, 1fr));
   }
   .flex-col {
     flex-direction: column;
@@ -976,6 +986,9 @@
   }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+  }
+  .filter\! {
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,) !important;
   }
   .transition {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;

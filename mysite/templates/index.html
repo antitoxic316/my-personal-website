@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <div 
+    id="rendererDiv" 
+    class="flex-grow min-h-200"
+    data-laptop-obj-url="{% static 'resources/models/laptop/laptop2.obj' %}"
+    data-laptop-txt-url="{% static 'resources/models/laptop/laptop.png' %}"
+  ></div>
+  <script type="module" src="{% static '/js/dist/main.js' %}"></script>
+{% endblock %}

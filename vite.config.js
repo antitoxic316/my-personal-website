@@ -3,12 +3,13 @@ import path from 'path';
 
 export default defineConfig({
   build: {
-    outDir: './mysite/static/dist',
-    emptyOutDir: true,
-    manifest: true,
+    outDir: './stuff/static/js/dist',
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'src/main.js')
+      },
+      output: {
+        entryFileNames: 'main.js',
       }
     }
   }
