@@ -190,9 +190,6 @@
   .visible {
     visibility: visible;
   }
-  .visible\! {
-    visibility: visible !important;
-  }
   .absolute {
     position: absolute;
   }
@@ -683,9 +680,6 @@
   .hidden {
     display: none;
   }
-  .hidden\! {
-    display: none !important;
-  }
   .inline {
     display: inline;
   }
@@ -721,17 +715,8 @@
   .h-full {
     height: 100%;
   }
-  .min-h-96 {
-    min-height: calc(var(--spacing) * 96);
-  }
   .min-h-200 {
     min-height: calc(var(--spacing) * 200);
-  }
-  .min-h-400 {
-    min-height: calc(var(--spacing) * 400);
-  }
-  .min-h-full {
-    min-height: 100%;
   }
   .w-14 {
     width: calc(var(--spacing) * 14);
@@ -752,9 +737,6 @@
     max-width: var(--container-4xl);
   }
   .flex-shrink {
-    flex-shrink: 1;
-  }
-  .shrink {
     flex-shrink: 1;
   }
   .flex-grow {
@@ -986,9 +968,6 @@
   }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
-  }
-  .filter\! {
-    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,) !important;
   }
   .transition {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;

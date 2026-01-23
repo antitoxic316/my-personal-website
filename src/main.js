@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import {OBJLoader} from 'three/addons/loaders/OBJLoader.js';
+import {MTLLoader} from 'three/addons/loaders/MTLLoader.js';
 
 const elem = document.getElementById("rendererDiv")
 console.log(elem)
@@ -30,12 +31,22 @@ if(elem) {
 
   camera.position.set(0, 5, 15);
 
-  const objLoader = new OBJLoader();
-  objLoader.load(elem.dataset.laptopObjUrl, (root) => {
-    scene.add(root);
-  }, undefined, function ( error ) {
-    console.error( error );
-  });
+  const mtlLoader = new MTLLoader();
+  mtlLoader.setResourcePath(elem.dataset.laptopRootUrl)
+  mtlLoader.load(elem.dataset.laptopMtlUrl, (materials) => {
+    console.log(materials)
+    console.log('Resource path:', elem.dataset.laptopRootUrl);
+console.log('MTL materials:', materials.materials);
+    materials.preload();
+    const objLoader = new OBJLoader();
+    objLoader.setMaterials(materials);
+    objLoader.load(elem.dataset.laptopObjUrl, (root) => {
+      console.log(root)
+      scene.add(root);
+    }, undefined, function ( error ) {
+      console.error( error );
+    });
+  })
 
   const color = 0xFFFFFF;
   const intensity = 1;

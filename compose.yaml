@@ -1,0 +1,46 @@
+volumes:
+  postgres_data:
+
+
+services:
+  db:
+    build: ./docker-postgres
+    restart: always
+    shm_size: 1024mb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # save all configs on container deletion
+      - ./docker-postgres/init:/docker-entrypoint-init-db.d
+    secrets:
+      - db_password
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports: # TODO: remove in prod
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8001:5432
+
+  django:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    volumes:
+      - ./docker-django/init:/docker-entrypoint-init-django.d
+
+secrets:
+  db_password:
+    file: db_password.secret.txt
