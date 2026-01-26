@@ -32,14 +32,13 @@ services:
       - 8001:5432
 
   django:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    build: . 
     ports:
       - 8000:8000
     depends_on:
       - db
-    volumes:
-      - ./docker-django/init:/docker-entrypoint-init-django.d
+    post_start:
+      - command: ["bash", "-c", "/docker-entrypoint-init.d/init.sh"]
 
 secrets:
   db_password:
