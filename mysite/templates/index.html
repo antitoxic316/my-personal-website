@@ -6,10 +6,9 @@
   <div 
     id="rendererDiv" 
     class="flex-grow min-h-200"
-    data-laptop-obj-url="{% static 'resources/models/laptop/laptop.obj' %}"
-    data-laptop-txt-url="{% static 'resources/models/laptop/laptop.png' %}"
-    data-laptop-mtl-url="{% static 'resources/models/laptop/laptop.mtl' %}"
-    data-laptop-root-url="{% static 'resources/models/laptop/' %}"
-  ></div>
+    data-laptop-obj-url="{% static 'resources/models/laptop/laptop.glb' %}"
+  >
+    <canvas></canvas>
+  </div>
   <script type="module" src="{% static '/js/dist/main.js' %}"></script>
 {% endblock %}

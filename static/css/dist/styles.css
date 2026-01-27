@@ -736,9 +736,6 @@
   .max-w-4xl {
     max-width: var(--container-4xl);
   }
-  .flex-shrink {
-    flex-shrink: 1;
-  }
   .flex-grow {
     flex-grow: 1;
   }
@@ -789,9 +786,6 @@
   }
   .gap-6 {
     gap: calc(var(--spacing) * 6);
-  }
-  .gap-x-1 {
-    column-gap: calc(var(--spacing) * 1);
   }
   .gap-x-1\.5 {
     column-gap: calc(var(--spacing) * 1.5);
@@ -934,9 +928,6 @@
   .inset-ring-1 {
     --tw-inset-ring-shadow: inset 0 0 0 1px var(--tw-inset-ring-color, currentcolor);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  }
-  .inset-ring-white {
-    --tw-inset-ring-color: var(--color-white);
   }
   .inset-ring-white\/5 {
     --tw-inset-ring-color: color-mix(in srgb, #fff 5%, transparent);

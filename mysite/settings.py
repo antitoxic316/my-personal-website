@@ -79,6 +79,9 @@ MIDDLEWARE = [
     "django_browser_reload.middleware.BrowserReloadMiddleware", #needed for autoreload
 ]
 
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+SESSION_COOCKIE_HTTPONLY = True
+
 ROOT_URLCONF = 'mysite.urls'
 
 TEMPLATES = [
