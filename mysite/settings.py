@@ -110,7 +110,7 @@ DATABASES = {
         "NAME": os.getenv("PG_NAME"),
         "USER": os.getenv("PG_USER"),
         "PASSWORD": os.getenv("PG_PASSWORD"),
-        "HOST": 'localhost', # should be 'db' when dockerized
+        "HOST": 'localhost',
         "PORT": "5432", 
     }
 }

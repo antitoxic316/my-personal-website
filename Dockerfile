@@ -36,12 +36,26 @@ ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
 
 
+
+
 USER apache
 RUN mkdir /app/mod_wsgi
-CMD ["mod_wsgi-express", "start-server", \
+RUN mkdir /app/logs
+CMD [ \
+  "mod_wsgi-express", "start-server", \
+  "--server-name", "django.docker.localhost", \
   "--user", "apache", \
   "--group", "apache", \
   "--working-directory", "/app", \
   "--entry-point", "/app/mysite/wsgi.py", \
   "--server-root", "/app/mod_wsgi", \
-  "--locale", "C.UTF-8"]
+  "--locale", "C.UTF-8", \
+  "--max-log-size", "500", \ 
+  "--processes", "4", \
+  "--threads", "12", \
+  "--include-file", "/app/docker-django/config/httpd.conf", \
+  "--trust-proxy-header", "X-Forwarded-Host", \
+  "--trust-proxy", "172.20.0.0/16", \
+  "--host", "0.0.0.0", \
+  "--port", "8000" \
+]
