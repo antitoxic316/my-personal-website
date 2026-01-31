@@ -5,7 +5,7 @@
 {% block content %}
   <div class="mx-auto items-center">
     <h1 class="text-4xl justify-center flex m-4">{{ project.name }}</h1>
-    {% thumbnail project.preview_img 800x800 crop as p_img %}
+    {% thumbnail project.preview_img 600x600 crop as p_img %}
               <img class="mx-auto" src="{{ p_img.url }}"
                 width="{{ p_img.width }}"
                 height="{{ p_img.height }}"/>

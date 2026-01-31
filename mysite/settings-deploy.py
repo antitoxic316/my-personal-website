@@ -23,8 +23,10 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'django.docker.localhost']
+ALLOWED_HOSTS = ['localhost', 'dmytrokoval.space']
 USE_X_FORWARDED_HOST = True
+
+ADMIN_ENABLED = False
 
 # Application definition
 
@@ -47,11 +49,6 @@ INSTALLED_APPS = [
 
     'tinymce',
 ]
-
-TINYMCE_DEFAULT_CONFIG = {
-    'plugins': 'codesample',
-    'toolbar': 'codesample',
-}
 
 STATIC_ROOT = BASE_DIR/'static/'
 STATIC_URL = 'static/'

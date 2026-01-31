@@ -11,6 +11,8 @@
             <a href="{% url 'quests:detail' quest.id %}">
               <p class="text-center">{{ quest.name }}</p>
             </a>
+
+            {% if quest.projects_links.all %}
             <hr>
             <div class="dropdown">
               <div class="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm inset-ring-1 inset-ring-white/5">
@@ -29,6 +31,7 @@
                 {% endfor %}
               </div>
             </div>
+            {% endif %}
           </div>
 
           <div class="">

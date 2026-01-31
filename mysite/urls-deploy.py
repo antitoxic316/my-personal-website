@@ -8,7 +8,6 @@ from .views import IndexView
 
 urlpatterns = [
     path('', IndexView.as_view()),
-    path('admin/', admin.site.urls),
     path('quests/', include("quests.urls")),
     path('projects/', include("projects.urls")),
     path('stuff/', include("stuff.urls")),

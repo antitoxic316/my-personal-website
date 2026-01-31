@@ -7,28 +7,67 @@ services:
       - no-new-privileges:true
     networks:
       - proxy
+      - cloudflare
+      - logger
     command:
+      - "--api.insecure=false"
+      - "--api.dashboard=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker.network=proxy"
-      - "--entryPoints.web.address=:80"
       - "--entryPoints.web.address=:80"
       - "--entryPoints.websecure.address=:443"
       - "--entryPoints.websecure.http.tls=true"
       - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
       - "--entryPoints.web.http.redirections.entryPoint.scheme=https"
-      # Let's Encrypt configuration
-      - "--certificatesresolvers.le.acme.email=dmutro.koval888@gmail.com.com" # replace with your actual email
-      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
-      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+    
+      - "--providers.file.directory=/etc/traefik/dynamic" #tls.yml is here
     ports:
-      - "80:80"
+      - "443:443"
       - "8080:8080"
     volumes:
-      - "./traefik.yml:/etc/traefik/traefik.yml"
+      - "./certs:/certs:ro"
+      - "./dynamic:/etc/traefik/dynamic:ro"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./letsencrypt:/letsencrypt"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`dashboard.docker.localhost`)"
+      - "traefik.http.routers.dashboard.entrypoints=web"
+      - "traefik.http.routers.dashboard.service=api@internal"
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    env_file:
+      - .env
+    command: 
+      - "tunnel"
+      - "--no-autoupdate"
+      - "--loglevel"
+      - "debug"
+      - "run"
+      - "--token"
+      - "${TUNNEL_TOKEN}"
+    networks:
+      - cloudflare
+      - logger
+
+  dozzle:
+    container_name: dozzle
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 8081:8080
+    environment:
+      DOZZLE_LEVEL: info
+      DOZZLE_TAILSIZE: 300
+    networks:
+      - logger
 
 networks:
   proxy:
     name: proxy
+  cloudflare:
+    name: cloudflare
+  logger:
+    name: logger

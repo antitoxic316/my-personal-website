@@ -52,8 +52,30 @@ INSTALLED_APPS = [
 ]
 
 TINYMCE_DEFAULT_CONFIG = {
-    'plugins': 'codesample',
-    'toolbar': 'codesample',
+    'selector': 'textarea.tinymce',
+    'height': 360,
+    'width': 'auto',
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 20,
+    'theme': 'silver',
+    'plugins': '''
+        save link image media preview codesample 
+        table code lists directionality searchreplace wordcount visualblocks
+        visualchars autolink charmap anchor
+    ''',
+    'toolbar': '''
+        fullscreen preview bold italic underline | fontselect,
+        fontsizeselect | forecolor backcolor | alignleft alignright |
+        aligncenter alignjustify | indent outdent | bullist numlist table |
+        | link image media | codesample |
+    ''',
+    'contextmenu': 'formats | link image',
+    'menubar': True,
+    'statusbar': True,
+
+    # for images
+    'relative_urls': False,
+    'document_base_url': '/',
 }
 
 STATIC_ROOT = BASE_DIR/'static/'

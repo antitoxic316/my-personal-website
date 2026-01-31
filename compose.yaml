@@ -28,16 +28,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    ports: # TODO: remove in prod
-      - 5432:5432
-    networks:
-      - internal-django
-
-  adminer:
-    image: adminer
-    restart: always
     ports:
-      - 8001:5432
+      - 5432:5432
     networks:
       - internal-django
 
@@ -55,10 +47,13 @@ services:
       - WHOAMI_NAME=WSGI_Django
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.django.rule=Host(`django.docker.localhost`)"
-      - "traefik.http.routers.django.entrypoints=web"
+      - "traefik.http.routers.django.rule=Host(`dmytrokoval.space`)"
+      - "traefik.http.routers.django.entrypoints=websecure"
+      - "traefik.http.routers.django.tls=true"
+
       - "traefik.http.services.django.loadbalancer.server.port=8000" 
       - "traefik.docker.network=proxy"
+      
       - "traefik.http.middlewares.secure-headers.headers.frameDeny=true"
       - "traefik.http.middlewares.secure-headers.headers.sslRedirect=true"
       - "traefik.http.middlewares.secure-headers.headers.browserXssFilter=true"
@@ -66,10 +61,8 @@ services:
       - "traefik.http.middlewares.secure-headers.headers.stsIncludeSubdomains=true"
       - "traefik.http.middlewares.secure-headers.headers.stsPreload=true"
       - "traefik.http.middlewares.secure-headers.headers.stsSeconds=31536000"
-      - "traefik.http.middlewares.ip-allowlist.ipallowlist.sourceRange=127.0.0.1/32,192.168.0.0/16,10.0.0.0/8"
+      - "traefik.http.middlewares.ip-allowlist.ipallowlist.sourceRange=172.21.0.0/16" #cloudflare docker container addr range
       - "traefik.http.routers.django.middlewares=secure-headers,ip-allowlist"
-      - "traefik.http.routers.django.tls.certresolver=le"
-
 
 secrets:
   db_password:

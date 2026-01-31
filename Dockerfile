@@ -36,14 +36,12 @@ ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
 
 
-
-
 USER apache
 RUN mkdir /app/mod_wsgi
 RUN mkdir /app/logs
 CMD [ \
   "mod_wsgi-express", "start-server", \
-  "--server-name", "django.docker.localhost", \
+  "--server-name", "dmytrokoval.space", \
   "--user", "apache", \
   "--group", "apache", \
   "--working-directory", "/app", \

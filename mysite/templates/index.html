@@ -7,8 +7,23 @@
     id="rendererDiv" 
     class="flex-grow min-h-200"
     data-laptop-obj-url="{% static 'resources/models/laptop/laptop.glb' %}"
+    data-projects-url="{% url 'projects:index' %}"
+    data-quests-url="{% url 'quests:index' %}"
+    data-stuff-url="{% url 'stuff:cat' %}"
   >
     <canvas></canvas>
   </div>
+  <script src="{% static 'js/cookies.js' %}"></script>
   <script type="module" src="{% static '/js/dist/main.js' %}"></script>
+  <script>
+    canvDiv = document.getElementById("rendererDiv");
+    if(canvDiv){
+      const csName = getCookie("colorScheme_");
+      const hexColor = CSDict[csName].canvasBgHexColor;
+
+      console.log(hexColor);
+
+      canvDiv.dataset.mainbgColor = hexColor;
+    }
+  </script>
 {% endblock %}
