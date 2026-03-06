@@ -22,8 +22,6 @@ services:
       - "--entryPoints.web.http.redirections.entryPoint.scheme=https"
     
       - "--providers.file.directory=/etc/traefik/dynamic" #tls.yml is here
-    ports:
-      - "443:443"
       - "8080:8080"
     volumes:
       - "./certs:/certs:ro"

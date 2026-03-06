@@ -6,12 +6,11 @@
   <div class="mx-auto">
     <h1 class="text-4xl justify-center flex m-4">{{ quest.name }}</h1>
     {% thumbnail quest.preview_img 800x800 crop as p_img %}
-              <img class="mx-auto" src="{{ p_img.url }}"
+              <img class="mx-auto m-4" src="{{ p_img.url }}"
                 width="{{ p_img.width }}"
                 height="{{ p_img.height }}"/>
-    <hr>
     <div class="flex justify-center">
-      <div class="break-words prose text-[var(--txt-color)] max-w-4xl">
+      <div class="shadow-xl p-6 border-2 break-words prose text-[var(--txt-color)] lg:max-w-5xl">
         {{ quest.detail_content|safe }}
       </div>
     </div>

@@ -5,7 +5,7 @@ const CSDict = {
                   </svg>				
                `,
     "css_class": "color-scheme-night",
-    "canvasBgHexColor": "#222121"
+    "canvasBgHexColor": "#383737"
   },
   "white": {
     "svg_str": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -13,7 +13,7 @@ const CSDict = {
                   </svg>
                `,
     "css_class": "color-scheme-day",
-    "canvasBgHexColor": "#dddddd"
+    "canvasBgHexColor": "#e4e4e4"
   },
   "commonality": {
     "svg_str": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -21,7 +21,7 @@ const CSDict = {
                   </svg>
                `,
     "css_class": "color-scheme-commonality",
-    "canvasBgHexColor": "#DFC7BC"
+    "canvasBgHexColor": "#b29f96"
   }
 }
 const CSKeys = ["dark", "white", "commonality"]
@@ -57,6 +57,12 @@ function colorSchemeSet(name) {
     document.documentElement.classList.add(scheme.css_class)
 
     currentScheme = i;
+
+    canvDiv = document.getElementById("rendererDiv");
+    if(canvDiv){
+      const hexColor = CSDict[name].canvasBgHexColor;
+      canvDiv.dataset.mainbgColor = hexColor;
+    }
   }
 }
 

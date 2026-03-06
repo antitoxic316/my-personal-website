@@ -24,4 +24,7 @@ class CatView(generic.TemplateView):
 class StatsView(generic.TemplateView):
   template_name = "stuff/stats.html"
 
+  extra_context = {
+    "staticFilesNum": 5,
+  }
   

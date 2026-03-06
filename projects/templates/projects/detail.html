@@ -6,7 +6,7 @@
   <div class="mx-auto items-center">
     <h1 class="text-4xl justify-center flex m-4">{{ project.name }}</h1>
     {% thumbnail project.preview_img 600x600 crop as p_img %}
-              <img class="mx-auto" src="{{ p_img.url }}"
+              <img class="mx-auto m-4 shadow-xl/50" src="{{ p_img.url }}"
                 width="{{ p_img.width }}"
                 height="{{ p_img.height }}"/>
     <hr>
@@ -17,7 +17,7 @@
     </div>
     <hr>
     <div class="flex justify-center">
-      <div class="break-words prose text-[var(--txt-color)] max-w-4xl">
+      <div class="shadow-xl p-6 border-b-2 border-x-2 break-words prose text-[var(--txt-color)] lg:max-w-6xl">
         {{ project.detail_content|safe }}
       </div>
     </div>

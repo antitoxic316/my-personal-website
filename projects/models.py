@@ -12,3 +12,5 @@ class Project(models.Model):
   detail_content = tinymce_models.HTMLField(default="")
 
   relevant_links = models.JSONField(default=list, blank=True)
+
+  tag_list = models.JSONField(default=list, blank=True);

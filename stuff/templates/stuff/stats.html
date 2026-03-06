@@ -1,35 +1,130 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="grid grid-cols-6 items-start gap-6">
+  <div class="grid grid-cols-5 items-start gap-6">
     <div id="clockStats">
-      <span id="clock"></span>
+      <span id="clockSpan"></span>
     </div>        
-    <div id="staticFilesStats">
+    <div id="staticFilesStats" data-static-files-num="{{ staticFilesNum }}">
+      <span id="staticSpan"></span>
     </div>        
     <div id="coockiesStats">
+      <span id="cookiesSpan"></span>
     </div>
     <div id="ipStats">
+      <span id="ipSpan"></span>
     </div>
     <div id="headersStats">
+      <span id="headersSpan"></span>
     </div>
     <div id="timerStats">
-      <span id="timer"></span>
+      <span id="timerSpan"></span>
     </div>
   </div>
 
 <script>
-  setInterval(() => {
-    var now = new Date()
-    clock.innerHTML = now
-  }, 1000)
+  class SensitiveInfoWrapper{
+    constructor(populateFnName, containerElem){
+      this.containerElem = containerElem;
+    
+      containerElem.innerHTML = `
+        <div class="items-center flex">
+          <p>This might contain sensitive data...</p>
+          <button onclick="${populateFnName}()" class="m-2 cursor-pointer hover:bg-[var(--bg-alt)] border-solid border-1">
+            <p class="m-2">Show?</p>
+          </button>
+        </div>
+      `
+    }
+  }
+
+  const populateClock = () => {
+    var now = new Date();
+    clockSpan.innerHTML = now;
+  }
+
+  const populateTimer = () => {
+    var date = new Date();
+    date.setHours(0,0,date.getSeconds(),date.getMilliseconds());
+    var sec = date.getMilliseconds();
+    var finale_str = `${date.getSeconds()}.${date.getMilliseconds()}`;
+    timerSpan.innerHTML = finale_str;
+  }
+
+  function populateIP() {
+    async function populateIPTimed(){
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        ipSpan.innerText = data.ip;
+      } catch (error) {
+        ipSpan.innerText = 'Error fetching IP address';
+      }
+    }
+
+    populateIPTimed();
+
+    setInterval(() => {
+      populateIPTimed();
+    }, 1000);
+  }
+
+  const populateCookies = () => {
+    function populateCookiesTimed(){
+      resultHTML = "";
+      document.cookie.split(';').forEach((item) => {
+        resultHTML += `<p class="hidden-overflow text-ellipsis">${item}</p>`;
+      });
+      cookiesSpan.innerHTML = resultHTML;
+    }
+
+    //quick hack
+    cookiesSpan.parentElement.classList.add("truncate");
+
+    populateCookiesTimed();
+    
+    setInterval(() => {
+      populateCookiesTimed();
+    }, 1000);
+  }
+
+  const populateHeaders = () => {
+    var req = new XMLHttpRequest();
+    req.open('GET', document.location, true);
+    req.send(null);
+    req.onload = function() {
+      var headers = req.getAllResponseHeaders();
+
+      resultHTML = "";
+      headers.toString().split('\r\n').forEach((item) => {
+        resultHTML += `<p class="p-1 hidden-overflow text-ellipsis">${item}</p>`;
+      });
+
+      headersSpan.innerHTML = resultHTML;
+      console.log(headers);
+    };
+  }
+
+  const populateStaticFiles = () => {
+    staticSpan.innerHTML = `Number of used HTML templates: ${staticFilesStats.dataset.staticFilesNum}`;
+  }
+
+  populateClock();
+  populateTimer();
 
   setInterval(() => {
-    var date = new Date()
-    date.setHours(0,0,date.getSeconds(),date.getMilliseconds())
-    var sec = date.getMilliseconds()
-    var finale_str = `${date.getSeconds()}.${date.getMilliseconds()}`
-    timer.innerHTML = finale_str
-  }, 1)
+    populateClock();
+  }, 1000);
+
+  setInterval(() => {
+    populateTimer();
+  }, 1);
+
+  ipWrapper = new SensitiveInfoWrapper("populateIP", ipSpan);
+  cookiesWrapper = new SensitiveInfoWrapper("populateCookies", cookiesSpan);
+
+  //non changable stats;
+  populateStaticFiles();
+  populateHeaders();
 </script>
 {% endblock %}

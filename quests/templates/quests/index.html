@@ -6,10 +6,10 @@
   {% if quests_list %}
     <div class="grid grid-cols-4 items-start gap-6">
       {% for quest in quests_list %}
-        <div class="border-1 border-solid rounded-md flex justify-between items-center">
+        <div class="shadow-xl border-solid border-t-4 flex justify-between items-center">
           <div class="flex-grow">
             <a href="{% url 'quests:detail' quest.id %}">
-              <p class="text-center">{{ quest.name }}</p>
+              <p class="text-left">{{ quest.name }}</p>
             </a>
 
             {% if quest.projects_links.all %}
@@ -34,7 +34,7 @@
             {% endif %}
           </div>
 
-          <div class="">
+          <div class="flex min-w-16 max-w-16">
             {% thumbnail quest.preview_img 80x80 crop as p_img %}
             <img class="mx-auto" src="{{ p_img.url }}"
               width="{{ p_img.width }}"

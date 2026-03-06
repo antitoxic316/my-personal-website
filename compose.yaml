@@ -61,7 +61,7 @@ services:
       - "traefik.http.middlewares.secure-headers.headers.stsIncludeSubdomains=true"
       - "traefik.http.middlewares.secure-headers.headers.stsPreload=true"
       - "traefik.http.middlewares.secure-headers.headers.stsSeconds=31536000"
-      - "traefik.http.middlewares.ip-allowlist.ipallowlist.sourceRange=172.21.0.0/16" #cloudflare docker container addr range
+      - "traefik.http.middlewares.ip-allowlist.ipallowlist.sourceRange=172.0.0.0/8" #docker default container addr range
       - "traefik.http.routers.django.middlewares=secure-headers,ip-allowlist"
 
 secrets:

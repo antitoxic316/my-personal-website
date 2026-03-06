@@ -2,7 +2,6 @@ import * as THREE from 'three'
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 
-
 const elem = document.getElementById("rendererDiv")
 if(!elem){
   throw "canvas div not found";
@@ -117,6 +116,23 @@ class CanvasRotator {
       this.dragRotate(this.prevEv, event);
       this.prevEv = event;
     });
+
+
+     
+    canvasContainer.addEventListener('mousemove', setPickPosition);
+    canvasContainer.addEventListener('mouseout', clearPickPosition);
+    canvasContainer.addEventListener('mouseleave', clearPickPosition);
+
+    canvasContainer.addEventListener('touchstart', (event) => {
+      // prevent the window from scrolling
+      event.preventDefault();
+      setPickPosition(event.touches[0]);
+    }, {passive: false});
+    canvasContainer.addEventListener('touchmove', (event) => {
+      setPickPosition(event.touches[0]);
+    });
+    
+    canvasContainer.addEventListener('touchend', clearPickPosition);
   }
 
   dragRotate(prevEv, ev) {
@@ -148,6 +164,17 @@ function populateCanvas(){
   const renderer = new THREE.WebGLRenderer({antialias: true, canvas});
   renderer.setSize( width, height );
   renderer.setClearColor(elem.dataset.mainbgColor);
+  const observer = new MutationObserver((mutationList, observer) => {
+    for (const mutation of mutationList) {
+      if(mutation.attributeName === "data-mainbg-color"){
+        if(mutation.target === elem){
+          renderer.setClearColor(elem.dataset.mainbgColor);
+          break;
+        }
+      }
+    }
+  })
+  observer.observe(elem, {attributes: true});
 
   const geometry = new THREE.BoxGeometry( 1, 1, 1 );
   const material = new THREE.MeshPhongMaterial( { color: 0x00ff00 } );
@@ -213,21 +240,5 @@ function clearPickPosition() {
   pickPosition.x = -100000;
   pickPosition.y = -100000;
 }
- 
-window.addEventListener('mousemove', setPickPosition);
-window.addEventListener('mouseout', clearPickPosition);
-window.addEventListener('mouseleave', clearPickPosition);
-window.addEventListener('touchstart', (event) => {
-  // prevent the window from scrolling
-  event.preventDefault();
-  setPickPosition(event.touches[0]);
-}, {passive: false});
- 
-window.addEventListener('touchmove', (event) => {
-  setPickPosition(event.touches[0]);
-});
- 
-window.addEventListener('touchend', clearPickPosition);
-
 
 populateCanvas();
