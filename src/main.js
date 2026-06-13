@@ -86,7 +86,6 @@ class CanvasRotator {
       this.mousePressed = false;
       this.prevEv = null;
     });
-    
     canvasContainer.addEventListener('mousemove', (event) => {
       if (!this.mousePressed) return;
       if (!this.prevEv){
@@ -98,23 +97,23 @@ class CanvasRotator {
       this.prevEv = event;
     });
 
-    canvasContainer.addEventListener('touchend', (event) => {
+    canvasContainer.addEventListener('touchstart', (event) => {
       this.mousePressed = true;
     });
-    canvasContainer.addEventListener('touchstart', (event) => {
+    canvasContainer.addEventListener('touchend', (event) => {
       this.mousePressed = false;
       this.prevEv = null;
     });
-    
     canvasContainer.addEventListener('touchmove', (event) => {
       if (!this.mousePressed) return;
       if (!this.prevEv){
-        this.prevEv = event;
+        console.log(event.touches[0]);
+        this.prevEv = event.touches[0];
         return;
       }
     
-      this.dragRotate(this.prevEv, event);
-      this.prevEv = event;
+      this.dragRotate(this.prevEv, event.touches[0]);
+      this.prevEv = event.touches[0];
     });
 
 
@@ -129,15 +128,16 @@ class CanvasRotator {
       setPickPosition(event.touches[0]);
     }, {passive: false});
     canvasContainer.addEventListener('touchmove', (event) => {
-      setPickPosition(event.touches[0]);
+      //setPickPosition(event.touches[0]);
     });
-    
     canvasContainer.addEventListener('touchend', clearPickPosition);
   }
 
   dragRotate(prevEv, ev) {
     var xVec = this.prevEv.clientX - ev.clientX;
     var yVec = this.prevEv.clientY - ev.clientY;
+
+    console.log(ev);
 
     // x and y flip is intentional
     this.obj.rotation.y -= xVec / canvas.clientWidth * Math.PI;

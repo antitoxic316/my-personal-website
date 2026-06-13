@@ -23,7 +23,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', 'dmytrokoval.space']
+ALLOWED_HOSTS = ['localhost', 'dmytrokoval.space', 'www.dmytrokoval.space']
 USE_X_FORWARDED_HOST = True
 
 ADMIN_ENABLED = False

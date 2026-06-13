@@ -13,18 +13,18 @@
 
     {% block content_title %} {% endblock %}
 		<script src="{% static 'js/colorscheme.js' %}"></script>
+		<script src="{% static 'js/cookies.js' %}"></script>
 		<script>
 			document.addEventListener("DOMContentLoaded", () => {
 				colorSchemeSetCookie();
 			});
 		</script>
-		<script src="{% static 'js/cookies.js' %}"></script>
 		<script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
 	</head>
 	<body class="!bg-[var(--bg)] font-serif leading-normal tracking-normal">
 		<header class="sticky top-0 z-50">
-			<nav class="!bg-[var(--bg-alt)] mx-auto items-center flex justify-between p-2 border-b-2">
-				<div class="flex items-stretch self-stretch gap-x-2">
+			<nav class="!bg-[var(--bg-alt)] mx-auto items-center md:flex sm:flex-grow justify-between p-2 border-b-2">
+				<div class="flex items-stretch self-stretch gap-x-2 justify-between">
 					<div class="flex items-center hover:bg-[var(--bg2)] p-4">
 						<a href="{% url 'projects:index' %}">Projects</a>
 					</div>
@@ -44,7 +44,7 @@
 					</div>
 				</div>
 				<div id="stretcher" class="flex-grow"></div>
-				<div class="flex">
+				<div class="flex align-center">
 					<p class="m-2">click to return to homepage ---></p>
 					<a href="/">
 						<img
@@ -62,14 +62,14 @@
 								<label class="cursor-pointer">
 									?
 								</label>
-								<svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="-mr-1 size-5 text-gray-400 cursor-pointer">
+								<svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="-mr-1 w-5 h-5 text-gray-400 cursor-pointer">
 									<path d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
 								</svg>
 							</button>
 						</div>
 						<el-menu anchor="bottom end" popover class="w-56 origin-top-right rounded-md outline-1 -outline-offset-1 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
 							<div class="py-1">
-								<p>This web page was made with intent to effeciently show my skill set. Also i just wanted to touch python and js for a bit</p>
+								<p>This web page was made with intend to efficiently show my skill set. Also i just wanted to touch python and js for a bit</p>
 							</div>
 						</el-menu>
 					</el-dropdown>	
